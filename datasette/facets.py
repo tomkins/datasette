@@ -442,7 +442,7 @@ class ArrayFacet(Facet):
                             "label": value,
                             "count": row["count"],
                             "toggle_url": self.ds.absolute_url(
-                                self.request, toggle_path
+                                self.request, self.ds.urls.path(toggle_path)
                             ),
                             "selected": selected,
                         }
@@ -534,8 +534,8 @@ class DateFacet(Facet):
                         "type": self.type,
                         "results": facet_results_values,
                         "hideable": source != "metadata",
-                        "toggle_url": path_with_removed_args(
-                            self.request, {"_facet_date": column}
+                        "toggle_url": self.ds.urls.path(
+                            path_with_removed_args(self.request, {"_facet_date": column})
                         ),
                         "truncated": len(facet_rows_results) > facet_size,
                     }
@@ -557,7 +557,7 @@ class DateFacet(Facet):
                             "label": row["value"],
                             "count": row["count"],
                             "toggle_url": self.ds.absolute_url(
-                                self.request, toggle_path
+                                self.request, self.ds.urls.path(toggle_path)
                             ),
                             "selected": selected,
                         }
